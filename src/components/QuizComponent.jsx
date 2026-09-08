@@ -1,9 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { HelpCircle, CheckCircle2, XCircle, Info, ArrowLeft } from 'lucide-react';
 
 export default function QuizComponent({ question, onAnswer }) {
   const [selectedOptionId, setSelectedOptionId] = useState(null);
   const [isSubmitted, setIsSubmitted] = useState(false);
+
+  // Guarantee state reset whenever a new question is loaded
+  useEffect(() => {
+    setSelectedOptionId(null);
+    setIsSubmitted(false);
+  }, [question?.id, question?.text]);
 
   const selectedOption = question.options.find(opt => opt.id === selectedOptionId);
 

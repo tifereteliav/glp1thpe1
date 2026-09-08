@@ -476,7 +476,7 @@ export default function Stage1Admission({ data, patient, onNext }) {
       <div style={{ marginTop: '10px' }}>
         {activeQuestionIndex === 0 ? (
           <div>
-            <QuizComponent question={data.question1} />
+            <QuizComponent key={data.question1.id} question={data.question1} />
             <div style={{ textAlign: 'left', marginTop: '16px' }}>
               <button 
                 onClick={() => setActiveQuestionIndex(1)}
@@ -490,7 +490,7 @@ export default function Stage1Admission({ data, patient, onNext }) {
           </div>
         ) : (
           <div>
-            <QuizComponent question={data.question2} />
+            <QuizComponent key={data.question2.id} question={data.question2} />
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '16px' }}>
               <button 
                 onClick={() => setActiveQuestionIndex(0)}
