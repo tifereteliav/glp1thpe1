@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
-import { User, Activity, FileText, ShieldAlert, HeartPulse, ChevronDown, ChevronUp, Pill, Stethoscope, BarChart2, CheckCircle2 } from 'lucide-react';
+import { User, Activity, FileText, ShieldAlert, HeartPulse, ChevronDown, ChevronUp, Pill, Stethoscope, BarChart2, CheckCircle2, Footprints } from 'lucide-react';
 import QuizComponent from './QuizComponent';
 
 export default function Stage1Admission({ data, patient, onNext }) {
-  // State for interactive collapsible sections (open by default, toggleable by user)
+  // State for interactive collapsible sections (ALL CLOSED BY DEFAULT)
   const [openSections, setOpenSections] = useState({
-    history: true,
-    physical: true,
-    labs: true,
-    meds: true
+    history: false,
+    physical: false,
+    labs: false,
+    meds: false
   });
 
   const [showDocModal, setShowDocModal] = useState(false);
@@ -85,7 +85,7 @@ export default function Stage1Admission({ data, patient, onNext }) {
           </div>
         </div>
 
-        {/* Right Column: 4 Interactive Toggle Collapsible Buttons/Cards */}
+        {/* Right Column: 4 Interactive Toggle Collapsible Buttons/Cards (CLOSED BY DEFAULT) */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: '18px' }}>
           
           {/* Collapsible 1: מחלות רקע של המטופל */}
@@ -112,7 +112,7 @@ export default function Stage1Admission({ data, patient, onNext }) {
                   <h3 style={{ fontSize: '1.2rem', fontWeight: 800, color: '#0f172a' }}>
                     מחלות רקע של המטופל
                   </h3>
-                  <span style={{ fontSize: '0.82rem', color: '#64748b' }}>לחץ לפתיחה/סגירה • 9 אבחנות רשומות</span>
+                  <span style={{ fontSize: '0.82rem', color: '#64748b' }}>לחץ לפתיחה/סגירה • סוכרת 2003, יתר לחץ דם, CVA ועוד</span>
                 </div>
               </div>
               {openSections.history ? <ChevronUp size={22} color="#64748b" /> : <ChevronDown size={22} color="#64748b" />}
@@ -170,7 +170,7 @@ export default function Stage1Admission({ data, patient, onNext }) {
                   <h3 style={{ fontSize: '1.2rem', fontWeight: 800, color: '#0f172a' }}>
                     בדיקה גופנית ומדדי סימנים חיוניים
                   </h3>
-                  <span style={{ fontSize: '0.82rem', color: '#64748b' }}>לחץ לפתיחה/סגירה • לחץ דם, משקל, BMI וסטטוס עישון</span>
+                  <span style={{ fontSize: '0.82rem', color: '#64748b' }}>לחץ לפתיחה/סגירה • לחץ דם, משקל, BMI, עישון ובדיקת כפות רגליים</span>
                 </div>
               </div>
               {openSections.physical ? <ChevronUp size={22} color="#64748b" /> : <ChevronDown size={22} color="#64748b" />}
@@ -178,7 +178,7 @@ export default function Stage1Admission({ data, patient, onNext }) {
 
             {openSections.physical && (
               <div style={{ padding: '0 24px 20px 24px', borderTop: '1px solid #f1f5f9' }}>
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '12px', marginTop: '16px' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '12px', marginTop: '16px', marginBottom: '16px' }}>
                   <div style={{ background: '#f8fafc', padding: '12px 16px', borderRadius: '12px', border: '1px solid #e2e8f0' }}>
                     <div style={{ fontSize: '0.82rem', color: '#64748b', fontWeight: 600 }}>לחץ דם</div>
                     <div style={{ fontSize: '1.25rem', fontWeight: 800, color: '#0f172a' }}>{patient.physicalExam.bloodPressure}</div>
@@ -205,6 +205,27 @@ export default function Stage1Admission({ data, patient, onNext }) {
                     <div style={{ fontSize: '1.25rem', fontWeight: 900, color: '#10b981', display: 'flex', alignItems: 'center', gap: '6px' }}>
                       <CheckCircle2 size={18} />
                       {patient.physicalExam.smoking}
+                    </div>
+                  </div>
+                </div>
+
+                {/* Foot Exam Special Box */}
+                <div style={{
+                  background: '#f0f9ff',
+                  border: '1.5px solid #bae6fd',
+                  padding: '14px 18px',
+                  borderRadius: '14px',
+                  display: 'flex',
+                  alignItems: 'flex-start',
+                  gap: '12px'
+                }}>
+                  <Footprints size={24} color="#0284c7" style={{ flexShrink: 0, marginTop: '2px' }} />
+                  <div>
+                    <div style={{ fontWeight: 800, color: '#0369a1', fontSize: '0.95rem', marginBottom: '2px' }}>
+                      בדיקת כפות רגליים:
+                    </div>
+                    <div style={{ fontSize: '0.92rem', color: '#1e293b', lineHeight: 1.5 }}>
+                      {patient.physicalExam.footExam}
                     </div>
                   </div>
                 </div>
@@ -236,7 +257,7 @@ export default function Stage1Admission({ data, patient, onNext }) {
                   <h3 style={{ fontSize: '1.2rem', fontWeight: 800, color: '#0f172a' }}>
                     בדיקות מעבדה של המטופל
                   </h3>
-                  <span style={{ fontSize: '0.82rem', color: '#64748b' }}>לחץ לפתיחה/סגירה • A1C, LDL, C-Peptide, GAD, GFR, ACR</span>
+                  <span style={{ fontSize: '0.82rem', color: '#64748b' }}>לחץ לפתיחה/סגירה • A1C כולל גרף היסטורי מקורי, LDL, C-Peptide, GAD, GFR, ACR</span>
                 </div>
               </div>
               {openSections.labs ? <ChevronUp size={22} color="#64748b" /> : <ChevronDown size={22} color="#64748b" />}
@@ -282,82 +303,102 @@ export default function Stage1Admission({ data, patient, onNext }) {
 
                 </div>
 
-                {/* Longitudinal A1C History Graph */}
+                {/* Exact 1:1 A1C History Graph & Document Viewer */}
                 <div style={{
-                  background: '#f8fafc',
-                  padding: '18px',
+                  background: '#ffffff',
+                  padding: '20px',
                   borderRadius: '16px',
-                  border: '1px solid #cbd5e1'
+                  border: '1.5px solid #cbd5e1',
+                  boxShadow: '0 4px 12px rgba(0,0,0,0.03)'
                 }}>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
-                    <div style={{ fontWeight: 800, color: '#0f172a', fontSize: '0.95rem', display: 'flex', alignItems: 'center', gap: '6px' }}>
-                      <BarChart2 size={18} color="#0284c7" />
-                      גרף היסטוריית A1C לאורך השנים (2011 - 2026):
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '14px', flexWrap: 'wrap', gap: '10px' }}>
+                    <div style={{ fontWeight: 800, color: '#0f172a', fontSize: '1rem', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                      <BarChart2 size={20} color="#0284c7" />
+                      גרף היסטוריית A1C מקורי (מדויק לפי תיק המטופל 2003 - 2026):
                     </div>
-                    <button onClick={() => openDoc('/labs/A1C.jpeg')} className="btn-secondary" style={{ fontSize: '0.78rem', padding: '4px 10px' }}>
-                      צפה בטבלת A1C מלאה
+                    <button onClick={() => openDoc('/labs/A1C.jpeg')} className="btn-secondary" style={{ fontSize: '0.85rem', padding: '6px 14px' }}>
+                      <FileText size={14} />
+                      צפה בגרף ובטבלת A1C המקורית
                     </button>
                   </div>
 
-                  {/* SVG Line Chart for A1C History */}
-                  <div style={{ width: '100%', height: '140px', position: 'relative', marginTop: '15px' }}>
-                    <svg width="100%" height="100%" viewBox="0 0 500 120" preserveAspectRatio="none" style={{ overflow: 'visible' }}>
-                      {/* Grid Lines */}
-                      <line x1="0" y1="20" x2="500" y2="20" stroke="#e2e8f0" strokeDasharray="4 4" />
-                      <line x1="0" y1="60" x2="500" y2="60" stroke="#e2e8f0" strokeDasharray="4 4" />
-                      <line x1="0" y1="100" x2="500" y2="100" stroke="#e2e8f0" strokeDasharray="4 4" />
+                  {/* 1:1 Scaled SVG Replica Chart of A1C.jpeg */}
+                  <div style={{ width: '100%', height: '180px', position: 'relative', marginTop: '10px', background: '#fafafa', borderRadius: '12px', padding: '10px', border: '1px solid #e2e8f0' }}>
+                    <svg width="100%" height="100%" viewBox="0 0 500 140" preserveAspectRatio="none" style={{ overflow: 'visible' }}>
+                      {/* Grid Lines (Range 4.0% to 15.0%) */}
+                      <line x1="0" y1="20" x2="500" y2="20" stroke="#cbd5e1" strokeDasharray="3 3" />
+                      <text x="5" y="24" fontSize="10" fill="#94a3b8">14.0%</text>
 
-                      {/* Polyline Path */}
+                      <line x1="0" y1="60" x2="500" y2="60" stroke="#cbd5e1" strokeDasharray="3 3" />
+                      <text x="5" y="64" fontSize="10" fill="#94a3b8">10.0%</text>
+
+                      <line x1="0" y1="100" x2="500" y2="100" stroke="#cbd5e1" strokeDasharray="3 3" />
+                      <text x="5" y="104" fontSize="10" fill="#94a3b8">6.0%</text>
+
+                      {/* Polyline Path matching A1C.jpeg chart */}
                       <polyline
                         fill="none"
                         stroke="#0284c7"
-                        strokeWidth="3"
+                        strokeWidth="2.5"
                         points="
-                          10,60
-                          45,15
-                          85,95
-                          125,90
-                          165,70
-                          205,100
-                          245,75
-                          285,85
-                          325,80
-                          365,50
-                          405,55
-                          445,65
-                          485,70
+                          20,105
+                          50,95
+                          80,98
+                          110,55
+                          140,95
+                          170,50
+                          200,12
+                          230,100
+                          260,98
+                          290,95
+                          320,102
+                          350,96
+                          380,97
+                          410,95
+                          440,90
+                          470,92
+                          490,95
                         "
                       />
 
-                      {/* Data Dots */}
+                      {/* Points matching exact values */}
                       {[
-                        { x: 10, y: 60, val: "7.1" },
-                        { x: 45, y: 15, val: "8.2" },
-                        { x: 85, y: 95, val: "6.2" },
-                        { x: 125, y: 90, val: "6.3" },
-                        { x: 165, y: 70, val: "6.7" },
-                        { x: 205, y: 100, val: "6.1" },
-                        { x: 245, y: 75, val: "6.6" },
-                        { x: 285, y: 85, val: "6.4" },
-                        { x: 325, y: 80, val: "6.5" },
-                        { x: 365, y: 50, val: "7.1" },
-                        { x: 405, y: 55, val: "7.0" },
-                        { x: 445, y: 65, val: "6.8" },
-                        { x: 485, y: 70, val: "6.7" }
+                        { x: 20, y: 105, val: "5.8%" },
+                        { x: 50, y: 95, val: "6.7%" },
+                        { x: 80, y: 98, val: "6.5%" },
+                        { x: 110, y: 55, val: "10.4%" },
+                        { x: 140, y: 95, val: "6.6%" },
+                        { x: 170, y: 50, val: "10.9%" },
+                        { x: 200, y: 12, val: "14.8%" },
+                        { x: 230, y: 100, val: "6.2%" },
+                        { x: 260, y: 98, val: "6.3%" },
+                        { x: 290, y: 95, val: "6.7%" },
+                        { x: 320, y: 102, val: "6.1%" },
+                        { x: 350, y: 96, val: "6.6%" },
+                        { x: 380, y: 97, val: "6.4%" },
+                        { x: 410, y: 95, val: "6.5%" },
+                        { x: 440, y: 90, val: "7.1%" },
+                        { x: 470, y: 92, val: "6.8%" },
+                        { x: 490, y: 95, val: "6.7%" }
                       ].map((pt, idx) => (
                         <g key={idx}>
-                          <circle cx={pt.x} cy={pt.y} r="4.5" fill="#0284c7" stroke="white" strokeWidth="2" />
-                          <text x={pt.x} y={pt.y - 8} textAnchor="middle" fontSize="10" fontWeight="bold" fill="#0369a1">{pt.val}%</text>
+                          <circle cx={pt.x} cy={pt.y} r="4" fill={parseFloat(pt.val) > 9 ? "#ef4444" : "#0284c7"} stroke="white" strokeWidth="1.5" />
+                          { (idx % 2 === 0 || parseFloat(pt.val) > 9) && (
+                            <text x={pt.x} y={pt.y - 7} textAnchor="middle" fontSize="9" fontWeight="bold" fill={parseFloat(pt.val) > 9 ? "#ef4444" : "#0369a1"}>{pt.val}</text>
+                          )}
                         </g>
                       ))}
                     </svg>
                   </div>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.75rem', color: '#64748b', marginTop: '10px' }}>
-                    <span>2011</span>
-                    <span>2014</span>
-                    <span>2017</span>
-                    <span>2020</span>
-                    <span>2023</span>
+
+                  <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.78rem', color: '#64748b', marginTop: '12px' }}>
+                    <span>2003</span>
+                    <span>2008</span>
+                    <span>2010</span>
+                    <span>2012 (שיא)</span>
+                    <span>2015</span>
+                    <span>2018</span>
+                    <span>2022</span>
                     <span>2026 (נוכחי)</span>
                   </div>
                 </div>
@@ -366,7 +407,7 @@ export default function Stage1Admission({ data, patient, onNext }) {
             )}
           </div>
 
-          {/* Collapsible 4: טיפול תרופתי נוכחי (ללא וויגובי!) */}
+          {/* Collapsible 4: טיפול תרופתי נוכחי (ללא וויגובי ובלי כפתור לפתיחת תמונת תרופות מקורית) */}
           <div className="glass-card" style={{ overflow: 'hidden', padding: 0 }}>
             <button
               onClick={() => toggleSection('meds')}
@@ -390,7 +431,7 @@ export default function Stage1Admission({ data, patient, onNext }) {
                   <h3 style={{ fontSize: '1.2rem', fontWeight: 800, color: '#0f172a' }}>
                     טיפול תרופתי נוכחי בביקור
                   </h3>
-                  <span style={{ fontSize: '0.82rem', color: '#64748b' }}>לחץ לפתיחה/סגירה • אינסולין, תרופות לחץ דם, כולסטרול והגנה</span>
+                  <span style={{ fontSize: '0.82rem', color: '#64748b' }}>לחץ לפתיחה/סגירה • אינסולין בזאלי ובולוס (כ-120 יח' ליום), תרופות לחץ דם, כולסטרול והגנה</span>
                 </div>
               </div>
               {openSections.meds ? <ChevronUp size={22} color="#64748b" /> : <ChevronDown size={22} color="#64748b" />}
@@ -406,7 +447,7 @@ export default function Stage1Admission({ data, patient, onNext }) {
                       borderRadius: '12px',
                       border: '1px solid #e2e8f0',
                       display: 'flex',
-                      justify: 'space-between',
+                      justifyContent: 'space-between',
                       alignItems: 'center',
                       flexWrap: 'wrap',
                       gap: '8px'
@@ -418,12 +459,6 @@ export default function Stage1Admission({ data, patient, onNext }) {
                       <span className="badge badge-gold" style={{ fontSize: '0.82rem' }}>{med.dose}</span>
                     </div>
                   ))}
-                </div>
-                <div style={{ marginTop: '14px', textAlign: 'left' }}>
-                  <button onClick={() => openDoc('/labs/תרופות.jpeg')} className="btn-secondary" style={{ fontSize: '0.85rem', padding: '6px 14px' }}>
-                    <FileText size={14} />
-                    צפה ברשימת התרופות המקורית
-                  </button>
                 </div>
               </div>
             )}
