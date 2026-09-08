@@ -4,9 +4,19 @@ export const patientProfile = {
   maritalStatus: "נשוי + 10 ילדים",
   occupation: "לא עובד, לומד תורה לעיתים",
   familyHistory: "סוכרת סוג 1 ידועה אצל הנכדה",
-  diabetesHistory: "סוכרת מאובחנת מגיל 40 (כ-24 שנים)",
+  diabetesHistory: "סוכרת מאובחנת משנת 2003 (כ-23 שנים)",
   image: "/moshe_patient.png",
   originalImage: "/original_patient.png",
+
+  physicalExam: {
+    bloodPressure: "158/72 mmHg",
+    pulse: "80 פעימות לדקה (סדיר)",
+    weight: "104 ק\"ג",
+    height: "175 ס\"מ",
+    bmi: 33.96,
+    waist: "92 ס\"מ",
+    smoking: "לא מעשן"
+  },
 
   baselineLabs: {
     a1c: "6.7%",
@@ -21,28 +31,43 @@ export const patientProfile = {
     gad: "2.8 U/mL (חיובי משנת 2010)"
   },
 
+  a1cHistory: [
+    { year: "2011", value: 7.1 },
+    { year: "2012", value: 8.2 },
+    { year: "2014", value: 6.2 },
+    { year: "2015", value: 6.3 },
+    { year: "2016", value: 6.7 },
+    { year: "2017", value: 6.1 },
+    { year: "2019", value: 6.6 },
+    { year: "2020", value: 6.4 },
+    { year: "2021", value: 6.5 },
+    { year: "2022", value: 7.1 },
+    { year: "2024", value: 7.0 },
+    { year: "2025", value: 6.8 },
+    { year: "2026", value: 6.7 }
+  ],
+
   medicalHistory: [
-    { name: "DIABETES MELLITUS TYPE I", year: "2003 (מאובחן משנת 2003/2010)" },
-    { name: "OBESITY (BMI > 30)", year: "2024 (BMI נוכחי 33)" },
-    { name: "ESSENTIAL HYPERTENSION", year: "2010" },
-    { name: "CVA (Ischemic Stroke)", year: "2020" },
-    { name: "NEUROPATHY DIABETIC", year: "2010" },
-    { name: "DYSTONIA (Secondary)", year: "2021" },
-    { name: "HYPERCHOLESTEROLEMIA", year: "2001" },
+    { name: "DIABETES MELLITUS TYPE I", year: "מאובחן משנת 2003" },
+    { name: "OBESITY (BMI > 30)", year: "2024 (BMI נוכחי 33.96)" },
+    { name: "ESSENTIAL HYPERTENSION (לחץ דם)", year: "2010" },
+    { name: "CVA (אירוע מוחי איסכמי)", year: "2020" },
+    { name: "NEUROPATHY DIABETIC (נוירופתיה)", year: "2010" },
+    { name: "DYSTONIA (דיסטוניה משנית)", year: "2021" },
+    { name: "HYPERCHOLESTEROLEMIA (עודף כולסטרול)", year: "2001" },
     { name: "TRIGGER FINGER", year: "2023" },
     { name: "היסטוריה של DKA (חמצת סוכרתית)", year: "2010" }
   ],
 
-  medicationsBaseline: [
-    "INS TREGLEDEC (Degludec) 66 units daily (היה Lantus 80u)",
-    "INS NOVORAPID FLEXPEN (12-18 units before meals)",
-    "SEMAGLUTIDE (Wegovy) prefilled pen - התחלת מדרג מינונים",
-    "BISOPROLOL TAB 2.5mg",
-    "AMLODIPINE-VALSARTAN 5/160mg",
-    "ATORVASTATIN 80mg",
-    "ACETYLSALICYLIC ACID (Aspirin) 100mg",
-    "ESOMEPRAZOLE 40mg",
-    "SENSOR FREESTYLE LIBRE 2"
+  medicationsBaselineCurrent: [
+    { name: "LANTUS (אינסולין בזאלי)", dose: "80 יחידות פעם ביום", purpose: "אינסולין בזאלי (נזקק לכ-120 יח' ליום בעבר בסה\"כ)" },
+    { name: "NOVORAPID FLEXPEN (אינסולין מהיר)", dose: "לפי צורך לפני ארוחות", purpose: "כיסוי ארוחות (אינסולין בולוס)" },
+    { name: "BISOPROLOL TAB 2.5MG", dose: "1 טבליה ביום", purpose: "איזון לחץ דם ודופק" },
+    { name: "AMLODIPINE-VALSARTAN 5/160MG", dose: "2 טבליות ביום", purpose: "איזון לחץ דם (היפרטנשן)" },
+    { name: "ATORVASTATIN TAB 80MG", dose: "1 טבליה ביום", purpose: "הורדת שומנים בדם וכולסטרול (LDL)" },
+    { name: "ACETYLSALICYLIC ACID (Aspirin) 100MG", dose: "1 טבליה ביום", purpose: "דילול דם ומניעת אירוע מוחי חוזר (CVA)" },
+    { name: "ESOMEPRAZOLE TAB 40MG", dose: "2 טבליות ביום", purpose: "הגנה על רירית הקיבה" },
+    { name: "SENSOR FREESTYLE LIBRE 2", dose: "חיישן ניטור רציף", purpose: "מדידת סוכר רציפה בדם" }
   ]
 };
 
@@ -53,9 +78,9 @@ export const simulationStages = [
     subtitle: "מפגש ראשון במרפאה - אבחנה דיפרנציאלית והתוויית תוכנית טיפול",
     badge: "ביקור ראשון",
     date: "ינואר 2026",
-    summary: `משה, בן 64, מגיע למרפאה לניהול ומעקב סוכרת. משה סובל מסוכרת סוג 1 מאובחנת מזה כ-24 שנים ומאופיין ב-BMI 33 (השמנה דרגה 1). למרות C-Peptide נמוך מאד (0.08) המעיד על חוסר אינסולין אנדוגני כמעט מוחלט, המטופל נזקק למינוני אינסולין גבוהים מאוד (~120 יחידות ביום בעבר, וכעת 80 יחידות), עקב תנגודת קשה לאינסולין הנובעת מהשמנה.`,
+    summary: `משה, בן 64, מגיע למרפאה לניהול ומעקב סוכרת. משה סובל מסוכרת סוג 1 מאובחנת משנת 2003 (כ-23 שנים) ומאופיין ב-BMI 33.96 (השמנה דרגה 1). למרות C-Peptide נמוך מאד (0.08) המעיד על חוסר אינסולין אנדוגני כמעט מוחלט, המטופל נזקק למינוני אינסולין גבוהים מאוד (~120 יחידות ביום בעבר, וכעת 80 יחידות), עקב תנגודת קשה לאינסולין הנובעת מהשמנה.`,
     highlights: [
-      "A1C: 6.7% | LDL: 48 mg/dL | BMI: 33",
+      "A1C: 6.7% | LDL: 48 mg/dL | BMI: 33.96",
       "C-Peptide: 0.08 ng/mL (חסר אינסולין אלמנטרי מובהק)",
       "מעבר מאינסולין Lantus ל-Degludec (טרגלודק) לשיפור היציבות הבזאלית",
       "התחלת טיפול באנלוג GLP-1 RA (וויגובי / Semaglutide) להפחתת משקל ותנגודת לאינסולין"
