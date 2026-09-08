@@ -210,6 +210,13 @@ export default function Stage1Admission({ data, patient, onNext }) {
                       {patient.physicalExam.smoking}
                     </div>
                   </div>
+
+                  <div style={{ background: '#fcf5ff', padding: '12px 16px', borderRadius: '12px', border: '1px solid #e9d5ff' }}>
+                    <div style={{ fontSize: '0.82rem', color: '#6b21a8', fontWeight: 600 }}>בדיקת עיניים (רטינה)</div>
+                    <div style={{ fontSize: '1.1rem', fontWeight: 800, color: '#7e22ce' }}>
+                      {patient.physicalExam.eyeExam}
+                    </div>
+                  </div>
                 </div>
 
                 {/* Foot Exam Special Box */}

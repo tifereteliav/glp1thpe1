@@ -2,16 +2,17 @@ import React, { useState } from 'react';
 import { patientProfile, simulationStages } from './data/simulationData';
 import WelcomeHero from './components/WelcomeHero';
 import Stage1Admission from './components/Stage1Admission';
+import Stage2FirstVisitData from './components/Stage2FirstVisitData';
 import Stage2Titration from './components/Stage2Titration';
 import Stage3AGP from './components/Stage3AGP';
 import Stage4Summary from './components/Stage4Summary';
 import { Activity, Stethoscope, ChevronLeft, ChevronRight, Award, RefreshCw, Sparkles, CheckCircle2 } from 'lucide-react';
 
 export default function App() {
-  const [currentStageIndex, setCurrentStageIndex] = useState(0); // 0 = Welcome screen, 1..4 = Stages
+  const [currentStageIndex, setCurrentStageIndex] = useState(0); // 0 = Welcome screen, 1..5 = Stages
   const [doorsOpen, setDoorsOpen] = useState(false);
   const [isEntering, setIsEntering] = useState(false);
-  const [quizScores, setQuizScores] = useState({ q1: null, q2: null, q3: null });
+  const [quizScores, setQuizScores] = useState({ q1: null, q2: null, q3: null, q4: null });
 
   // Handle 3D Perspective Door Opening Transition into Clinic Space
   const handleStartSimulation = () => {
@@ -35,7 +36,7 @@ export default function App() {
   const calculateScore = () => {
     const values = Object.values(quizScores).filter(v => v !== null);
     const correct = values.filter(v => v === true).length;
-    return { correct, total: 3 };
+    return { correct, total: 4 };
   };
 
   const currentStageData = simulationStages[currentStageIndex - 1];
@@ -166,7 +167,7 @@ export default function App() {
           )}
 
           {currentStageIndex === 2 && (
-            <Stage2Titration
+            <Stage2FirstVisitData
               data={currentStageData}
               onNext={() => setCurrentStageIndex(3)}
               onPrev={() => setCurrentStageIndex(1)}
@@ -174,7 +175,7 @@ export default function App() {
           )}
 
           {currentStageIndex === 3 && (
-            <Stage3AGP
+            <Stage2Titration
               data={currentStageData}
               onNext={() => setCurrentStageIndex(4)}
               onPrev={() => setCurrentStageIndex(2)}
@@ -182,6 +183,14 @@ export default function App() {
           )}
 
           {currentStageIndex === 4 && (
+            <Stage3AGP
+              data={currentStageData}
+              onNext={() => setCurrentStageIndex(5)}
+              onPrev={() => setCurrentStageIndex(3)}
+            />
+          )}
+
+          {currentStageIndex === 5 && (
             <Stage4Summary
               data={currentStageData}
               patient={patientProfile}

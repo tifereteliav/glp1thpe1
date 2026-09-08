@@ -152,7 +152,7 @@ export default function Stage2Titration({ data, onNext, onPrev }) {
       {/* Navigation Buttons */}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '10px' }}>
         <button onClick={onPrev} className="btn-secondary" style={{ padding: '14px 28px' }}>
-          → חזרה לשלב 1
+          → חזרה לשלב הקודם
         </button>
         <button onClick={onNext} className="btn-primary" style={{ padding: '16px 40px' }}>
           התקדמות לשלב הבא ←
