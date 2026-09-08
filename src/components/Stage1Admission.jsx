@@ -257,7 +257,7 @@ export default function Stage1Admission({ data, patient, onNext }) {
                   <h3 style={{ fontSize: '1.2rem', fontWeight: 800, color: '#0f172a' }}>
                     בדיקות מעבדה של המטופל
                   </h3>
-                  <span style={{ fontSize: '0.82rem', color: '#64748b' }}>לחץ לפתיחה/סגירה • A1C כולל גרף היסטורי מקורי, LDL, C-Peptide, GAD, GFR, ACR</span>
+                  <span style={{ fontSize: '0.82rem', color: '#64748b' }}>לחץ לפתיחה/סגירה • A1C כולל גרף היסטורי RTL, LDL, C-Peptide, GAD, GFR, ACR</span>
                 </div>
               </div>
               {openSections.labs ? <ChevronUp size={22} color="#64748b" /> : <ChevronDown size={22} color="#64748b" />}
@@ -303,7 +303,7 @@ export default function Stage1Admission({ data, patient, onNext }) {
 
                 </div>
 
-                {/* Exact 1:1 A1C History Graph & Document Viewer */}
+                {/* Exact RTL A1C History Graph (2003 on Right -> 2026 on Left) */}
                 <div style={{
                   background: '#ffffff',
                   padding: '20px',
@@ -314,7 +314,7 @@ export default function Stage1Admission({ data, patient, onNext }) {
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '14px', flexWrap: 'wrap', gap: '10px' }}>
                     <div style={{ fontWeight: 800, color: '#0f172a', fontSize: '1rem', display: 'flex', alignItems: 'center', gap: '8px' }}>
                       <BarChart2 size={20} color="#0284c7" />
-                      גרף היסטוריית A1C מקורי (מדויק לפי תיק המטופל 2003 - 2026):
+                      גרף היסטוריית A1C מקורי (מימין לשמאל: 2003 ← 2026 נוכחי):
                     </div>
                     <button onClick={() => openDoc('/labs/A1C.jpeg')} className="btn-secondary" style={{ fontSize: '0.85rem', padding: '6px 14px' }}>
                       <FileText size={14} />
@@ -322,64 +322,64 @@ export default function Stage1Admission({ data, patient, onNext }) {
                     </button>
                   </div>
 
-                  {/* 1:1 Scaled SVG Replica Chart of A1C.jpeg */}
+                  {/* RTL SVG Replica Chart of A1C.jpeg */}
                   <div style={{ width: '100%', height: '180px', position: 'relative', marginTop: '10px', background: '#fafafa', borderRadius: '12px', padding: '10px', border: '1px solid #e2e8f0' }}>
                     <svg width="100%" height="100%" viewBox="0 0 500 140" preserveAspectRatio="none" style={{ overflow: 'visible' }}>
                       {/* Grid Lines (Range 4.0% to 15.0%) */}
                       <line x1="0" y1="20" x2="500" y2="20" stroke="#cbd5e1" strokeDasharray="3 3" />
-                      <text x="5" y="24" fontSize="10" fill="#94a3b8">14.0%</text>
+                      <text x="490" y="24" textAnchor="end" fontSize="10" fill="#94a3b8">14.0%</text>
 
                       <line x1="0" y1="60" x2="500" y2="60" stroke="#cbd5e1" strokeDasharray="3 3" />
-                      <text x="5" y="64" fontSize="10" fill="#94a3b8">10.0%</text>
+                      <text x="490" y="64" textAnchor="end" fontSize="10" fill="#94a3b8">10.0%</text>
 
                       <line x1="0" y1="100" x2="500" y2="100" stroke="#cbd5e1" strokeDasharray="3 3" />
-                      <text x="5" y="104" fontSize="10" fill="#94a3b8">6.0%</text>
+                      <text x="490" y="104" textAnchor="end" fontSize="10" fill="#94a3b8">6.0%</text>
 
-                      {/* Polyline Path matching A1C.jpeg chart */}
+                      {/* RTL Polyline Path: Start 2003 at x=480 moving left to 2026 at x=20 */}
                       <polyline
                         fill="none"
                         stroke="#0284c7"
                         strokeWidth="2.5"
                         points="
-                          20,105
-                          50,95
-                          80,98
-                          110,55
-                          140,95
-                          170,50
-                          200,12
-                          230,100
-                          260,98
-                          290,95
-                          320,102
-                          350,96
-                          380,97
-                          410,95
-                          440,90
-                          470,92
-                          490,95
+                          480,105
+                          450,95
+                          420,98
+                          380,55
+                          350,95
+                          320,50
+                          290,12
+                          260,100
+                          230,98
+                          200,95
+                          170,102
+                          140,96
+                          110,97
+                          85,95
+                          65,90
+                          45,92
+                          20,95
                         "
                       />
 
-                      {/* Points matching exact values */}
+                      {/* RTL Points */}
                       {[
-                        { x: 20, y: 105, val: "5.8%" },
-                        { x: 50, y: 95, val: "6.7%" },
-                        { x: 80, y: 98, val: "6.5%" },
-                        { x: 110, y: 55, val: "10.4%" },
-                        { x: 140, y: 95, val: "6.6%" },
-                        { x: 170, y: 50, val: "10.9%" },
-                        { x: 200, y: 12, val: "14.8%" },
-                        { x: 230, y: 100, val: "6.2%" },
-                        { x: 260, y: 98, val: "6.3%" },
-                        { x: 290, y: 95, val: "6.7%" },
-                        { x: 320, y: 102, val: "6.1%" },
-                        { x: 350, y: 96, val: "6.6%" },
-                        { x: 380, y: 97, val: "6.4%" },
-                        { x: 410, y: 95, val: "6.5%" },
-                        { x: 440, y: 90, val: "7.1%" },
-                        { x: 470, y: 92, val: "6.8%" },
-                        { x: 490, y: 95, val: "6.7%" }
+                        { x: 480, y: 105, val: "5.8%", label: "2003" },
+                        { x: 450, y: 95, val: "6.7%", label: "2005" },
+                        { x: 420, y: 98, val: "6.5%", label: "2008" },
+                        { x: 380, y: 55, val: "10.4%", label: "2010" },
+                        { x: 350, y: 95, val: "6.6%", label: "2011" },
+                        { x: 320, y: 50, val: "10.9%", label: "2012" },
+                        { x: 290, y: 12, val: "14.8%", label: "2013" },
+                        { x: 260, y: 100, val: "6.2%", label: "2014" },
+                        { x: 230, y: 98, val: "6.3%", label: "2015" },
+                        { x: 200, y: 95, val: "6.7%", label: "2016" },
+                        { x: 170, y: 102, val: "6.1%", label: "2017" },
+                        { x: 140, y: 96, val: "6.6%", label: "2019" },
+                        { x: 110, y: 97, val: "6.4%", label: "2020" },
+                        { x: 85, y: 95, val: "6.5%", label: "2021" },
+                        { x: 65, y: 90, val: "7.1%", label: "2022" },
+                        { x: 45, y: 92, val: "6.8%", label: "2025" },
+                        { x: 20, y: 95, val: "6.7%", label: "2026" }
                       ].map((pt, idx) => (
                         <g key={idx}>
                           <circle cx={pt.x} cy={pt.y} r="4" fill={parseFloat(pt.val) > 9 ? "#ef4444" : "#0284c7"} stroke="white" strokeWidth="1.5" />
@@ -391,15 +391,16 @@ export default function Stage1Admission({ data, patient, onNext }) {
                     </svg>
                   </div>
 
-                  <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.78rem', color: '#64748b', marginTop: '12px' }}>
-                    <span>2003</span>
-                    <span>2008</span>
-                    <span>2010</span>
-                    <span>2012 (שיא)</span>
-                    <span>2015</span>
-                    <span>2018</span>
-                    <span>2022</span>
+                  {/* RTL X-Axis Labels: Right=2003, Left=2026 */}
+                  <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.82rem', color: '#64748b', marginTop: '12px', fontWeight: 600 }}>
                     <span>2026 (נוכחי)</span>
+                    <span>2024</span>
+                    <span>2021</span>
+                    <span>2017</span>
+                    <span>2013 (שיא)</span>
+                    <span>2010</span>
+                    <span>2008</span>
+                    <span>2003 (אבחון)</span>
                   </div>
                 </div>
 
@@ -468,7 +469,7 @@ export default function Stage1Admission({ data, patient, onNext }) {
 
       </div>
 
-      {/* Interactive Quiz #1 */}
+      {/* Interactive Quiz #1: איזה סוג סוכרת לדעתך יש למטופל? */}
       <QuizComponent question={data.question} />
 
       {/* Navigation Button */}
