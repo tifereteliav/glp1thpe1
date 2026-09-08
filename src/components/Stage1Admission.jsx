@@ -504,7 +504,7 @@ export default function Stage1Admission({ data, patient, onNext }) {
                 className="btn-primary"
                 style={{ padding: '16px 40px' }}
               >
-                התקדמות לשלב 2: התחלת Wegovy ומעקב 3 חודשים ←
+                התקדמות לשלב הבא ←
               </button>
             </div>
           </div>

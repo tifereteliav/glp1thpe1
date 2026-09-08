@@ -155,7 +155,7 @@ export default function Stage2Titration({ data, onNext, onPrev }) {
           → חזרה לשלב 1
         </button>
         <button onClick={onNext} className="btn-primary" style={{ padding: '16px 40px' }}>
-          התקדמות לשלב 3: ניתוח מדדי חיישן Libre (AGP) ←
+          התקדמות לשלב הבא ←
         </button>
       </div>
 

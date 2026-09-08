@@ -175,7 +175,7 @@ export default function Stage3AGP({ data, onNext, onPrev }) {
           → חזרה לשלב 2
         </button>
         <button onClick={onNext} className="btn-primary" style={{ padding: '16px 40px' }}>
-          התקדמות לשלב 4: סיכום קליני ומסקנות ←
+          התקדמות לשלב הבא ←
         </button>
       </div>
 
