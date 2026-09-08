@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { User, Activity, FileText, ShieldAlert, HeartPulse, ChevronDown, ChevronUp, Pill, Stethoscope, BarChart2, CheckCircle2, Footprints } from 'lucide-react';
+import { User, Activity, FileText, ShieldAlert, HeartPulse, ChevronDown, ChevronUp, Pill, Stethoscope, BarChart2, CheckCircle2, Footprints, ArrowLeft } from 'lucide-react';
 import QuizComponent from './QuizComponent';
 
 export default function Stage1Admission({ data, patient, onNext }) {
@@ -10,6 +10,9 @@ export default function Stage1Admission({ data, patient, onNext }) {
     labs: false,
     meds: false
   });
+
+  // State for progressive questions flow in Stage 1
+  const [activeQuestionIndex, setActiveQuestionIndex] = useState(0); // 0 = Question 1a (Diagnosis), 1 = Question 1b (GLP1 Rationale)
 
   const [showDocModal, setShowDocModal] = useState(false);
   const [activeDocImage, setActiveDocImage] = useState(null);
@@ -469,14 +472,43 @@ export default function Stage1Admission({ data, patient, onNext }) {
 
       </div>
 
-      {/* Interactive Quiz #1: איזה סוג סוכרת לדעתך יש למטופל? */}
-      <QuizComponent question={data.question} />
-
-      {/* Navigation Button */}
-      <div style={{ textAlign: 'left', marginTop: '10px' }}>
-        <button onClick={onNext} className="btn-primary" style={{ padding: '16px 40px' }}>
-          התקדמות לשלב 2: התחלת Wegovy ומעקב 3 חודשים ←
-        </button>
+      {/* Progressive Stage 1 Questions Section */}
+      <div style={{ marginTop: '10px' }}>
+        {activeQuestionIndex === 0 ? (
+          <div>
+            <QuizComponent question={data.question1} />
+            <div style={{ textAlign: 'left', marginTop: '16px' }}>
+              <button 
+                onClick={() => setActiveQuestionIndex(1)}
+                className="btn-primary"
+                style={{ padding: '16px 36px', fontSize: '1.1rem' }}
+              >
+                מעבר לשאלה הבאה
+                <ArrowLeft size={20} />
+              </button>
+            </div>
+          </div>
+        ) : (
+          <div>
+            <QuizComponent question={data.question2} />
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '16px' }}>
+              <button 
+                onClick={() => setActiveQuestionIndex(0)}
+                className="btn-secondary"
+                style={{ padding: '12px 24px' }}
+              >
+                → חזרה לשאלה הקודמת
+              </button>
+              <button 
+                onClick={onNext}
+                className="btn-primary"
+                style={{ padding: '16px 40px' }}
+              >
+                התקדמות לשלב 2: התחלת Wegovy ומעקב 3 חודשים ←
+              </button>
+            </div>
+          </div>
+        )}
       </div>
 
       {/* Original Document Viewer Modal */}
