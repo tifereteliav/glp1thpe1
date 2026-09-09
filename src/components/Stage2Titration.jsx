@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
-import { Pill, ShieldCheck, ArrowDownRight, TrendingDown, FileText, AlertCircle, Sparkles } from 'lucide-react';
+import { Pill, ShieldCheck, ArrowDownRight, TrendingDown, FileText, AlertCircle, Sparkles, CheckCircle2 } from 'lucide-react';
 import QuizComponent from './QuizComponent';
 
 export default function Stage2Titration({ data, onNext, onPrev }) {
-  const [showDocModal, setShowDocModal] = useState(false);
-  const [activeDocImage, setActiveDocImage] = useState(null);
-
-  const openDoc = (path) => {
-    setActiveDocImage(path);
-    setShowDocModal(true);
-  };
+  const wegovySteps = [
+    { dose: "0.25 mg", status: "completed", label: "מינון התחלתי" },
+    { dose: "0.5 mg", status: "completed", label: "שלב 2" },
+    { dose: "1.0 mg", status: "completed", label: "שלב 3" },
+    { dose: "1.7 mg", status: "active", label: "מינון נוכחי" },
+    { dose: "2.4 mg", status: "next", label: "מינון יעד סופי" }
+  ];
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '30px' }}>
@@ -26,6 +26,58 @@ export default function Stage2Titration({ data, onNext, onPrev }) {
             <span style={{ fontSize: '0.85rem', color: '#0f766e', fontWeight: 600 }}>סטטוס מינון Wegovy</span>
             <div style={{ fontWeight: 800, color: '#0d9488', fontSize: '1.1rem' }}>1.7 mg (לקראת 2.4 mg)</div>
           </div>
+        </div>
+      </div>
+
+      {/* Wegovy Titration Dose Scale Widget */}
+      <div className="glass-card" style={{ padding: '24px', background: 'linear-gradient(135deg, #ffffff 0%, #faf5ff 100%)', border: '2px solid #e9d5ff' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '16px' }}>
+          <Sparkles size={22} color="#7e22ce" />
+          <h3 style={{ fontSize: '1.2rem', fontWeight: 800, color: '#581c87' }}>
+            מד סולם מינוני Wegovy (Semaglutide) – תהליך טיטרציה מדורג
+          </h3>
+        </div>
+
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))',
+          gap: '12px',
+          marginTop: '12px'
+        }}>
+          {wegovySteps.map((step, idx) => {
+            const isActive = step.status === 'active';
+            const isCompleted = step.status === 'completed';
+
+            return (
+              <div key={idx} style={{
+                background: isActive ? '#7e22ce' : isCompleted ? '#f3e8ff' : '#f8fafc',
+                color: isActive ? 'white' : isCompleted ? '#6b21a8' : '#64748b',
+                padding: '16px 12px',
+                borderRadius: '16px',
+                border: isActive ? '2px solid #6b21a8' : isCompleted ? '1.5px solid #d8b4fe' : '1px solid #e2e8f0',
+                textAlign: 'center',
+                position: 'relative',
+                boxShadow: isActive ? '0 6px 16px rgba(126, 34, 206, 0.25)' : 'none'
+              }}>
+                <div style={{ fontSize: '0.78rem', opacity: 0.9, fontWeight: 700, marginBottom: '4px' }}>
+                  {step.label}
+                </div>
+                <div style={{ fontSize: '1.35rem', fontWeight: 900 }}>
+                  {step.dose}
+                </div>
+                {isCompleted && (
+                  <div style={{ fontSize: '0.72rem', marginTop: '4px', fontWeight: 700, color: '#7e22ce' }}>
+                    ✔ הושלם בהצלחה
+                  </div>
+                )}
+                {isActive && (
+                  <div style={{ fontSize: '0.75rem', marginTop: '4px', fontWeight: 800, background: 'rgba(255,255,255,0.25)', padding: '2px 8px', borderRadius: '10px' }}>
+                    ▲ מינון פעיל במעקב
+                  </div>
+                )}
+              </div>
+            );
+          })}
         </div>
       </div>
 
@@ -87,21 +139,24 @@ export default function Stage2Titration({ data, onNext, onPrev }) {
           </div>
 
           <div style={{
-            background: 'white',
+            background: 'linear-gradient(135deg, #ffffff 0%, #f0f9ff 100%)',
             padding: '20px',
             borderRadius: '18px',
-            border: '1px solid #cbd5e1',
-            boxShadow: '0 4px 12px rgba(0,0,0,0.03)'
+            border: '2px solid #bae6fd',
+            boxShadow: '0 4px 12px rgba(2, 132, 199, 0.05)'
           }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
               <span className="badge badge-blue">אינסולין מהיר (Novorapid)</span>
               <TrendingDown size={20} color="#0284c7" />
             </div>
-            <div style={{ fontSize: '1.4rem', fontWeight: 800, color: '#0369a1', marginTop: '12px' }}>
-              10-12 יחידות לפני ארוחות
+            <div style={{ fontSize: '1.35rem', fontWeight: 900, color: '#0369a1', marginTop: '12px' }}>
+              35-40u ← 10-12u לארוחה
             </div>
-            <div style={{ fontSize: '0.9rem', color: '#64748b', marginTop: '6px' }}>
-              ירידה במינון הבולוס עקב ירידה בצריכת הקלוריות והאטה בריקון הקיבה
+            <div style={{ fontSize: '0.92rem', fontWeight: 800, color: '#10b981', marginTop: '6px' }}>
+              📉 ירידה דרמטית של ~70% במינון הבולוס!
+            </div>
+            <div style={{ fontSize: '0.85rem', color: '#475569', marginTop: '4px' }}>
+              ממינון יומי של כ-120 יח' ליום (35-40u לארוחה) לירידה לכ-35 יח' ליום (10-12u לארוחה).
             </div>
           </div>
 
@@ -128,22 +183,6 @@ export default function Stage2Titration({ data, onNext, onPrev }) {
           </div>
         </div>
 
-        {/* View Document Buttons */}
-        <div style={{ display: 'flex', gap: '12px', marginTop: '24px', flexWrap: 'wrap' }}>
-          <button onClick={() => openDoc('/labs/ביקור14.7.jpeg')} className="btn-secondary">
-            <FileText size={16} />
-            צפה במסמך ביקור 14/07 מקורי
-          </button>
-          <button onClick={() => openDoc('/labs/ביקור 28.7.jpeg')} className="btn-secondary">
-            <FileText size={16} />
-            צפה במסמך ביקור 28/07 מקורי
-          </button>
-          <button onClick={() => openDoc('/labs/ביקור לאחר 3 חודשים.jpeg')} className="btn-secondary">
-            <FileText size={16} />
-            צפה במסמך מעקב 3 חודשים
-          </button>
-        </div>
-
       </div>
 
       {/* Interactive Quiz #2 */}
@@ -158,51 +197,6 @@ export default function Stage2Titration({ data, onNext, onPrev }) {
           התקדמות לשלב הבא ←
         </button>
       </div>
-
-      {/* Document Modal */}
-      {showDocModal && (
-        <div style={{
-          position: 'fixed',
-          inset: 0,
-          background: 'rgba(15, 23, 42, 0.75)',
-          backdropFilter: 'blur(8px)',
-          zIndex: 999,
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          padding: '20px'
-        }}>
-          <div style={{
-            background: 'white',
-            borderRadius: '20px',
-            maxWidth: '900px',
-            width: '100%',
-            maxHeight: '90vh',
-            overflow: 'hidden',
-            display: 'flex',
-            flexDirection: 'column'
-          }}>
-            <div style={{
-              padding: '16px 24px',
-              borderBottom: '1px solid #e2e8f0',
-              display: 'flex',
-              justify: 'space-between',
-              alignItems: 'center'
-            }}>
-              <h4 style={{ fontWeight: 800, fontSize: '1.1rem' }}>מסמך רפואי מקורי</h4>
-              <button 
-                onClick={() => setShowDocModal(false)}
-                style={{ background: '#f1f5f9', border: 'none', padding: '8px 16px', borderRadius: '8px', cursor: 'pointer', fontWeight: 700 }}
-              >
-                סגור
-              </button>
-            </div>
-            <div style={{ padding: '20px', overflowY: 'auto', textAlign: 'center' }}>
-              <img src={activeDocImage} alt="מסמך רפואי" style={{ maxWidth: '100%', borderRadius: '12px' }} />
-            </div>
-          </div>
-        </div>
-      )}
 
     </div>
   );

@@ -1,31 +1,43 @@
 import React, { useState } from 'react';
-import { Cpu, Usb, FileText, Activity, ShieldAlert, HeartPulse, CheckCircle2, ArrowLeft, Pill, Dumbbell, Apple, Info } from 'lucide-react';
+import { Cpu, Usb, FileText, Activity, ShieldAlert, HeartPulse, CheckCircle2, ArrowLeft, Pill, Dumbbell, Apple, Info, HelpCircle, ChevronDown, ChevronUp } from 'lucide-react';
 import QuizComponent from './QuizComponent';
 
 export default function Stage2FirstVisitData({ data, onNext, onPrev }) {
   const [showDocModal, setShowDocModal] = useState(false);
   const [activeDocImage, setActiveDocImage] = useState(null);
   const [showInjectionDetail, setShowInjectionDetail] = useState(false);
+  const [openQuestionIndex, setOpenQuestionIndex] = useState(null);
 
   const openDoc = (path) => {
     setActiveDocImage(path);
     setShowDocModal(true);
   };
 
+  const openQuestionsData = [
+    {
+      q: "1. האם המטופל עומד ביעד האיזון שלו?",
+      a: "לכאורה, A1C של 6.7% נראה מצוין ומתחת ליעד המקובל (<7.0%). אולם, המטופל נזקק למינוני אינסולין עצומים (סה\"כ כ-200 יחידות ביום: 80 בזאלי + כ-120 בולוס), סובל מהשמנה דרגה 1 (BMI 33.96), וחווה תנודתיות סוכר עקב תנגודת היקפית קשה וליפודוסטרופיה. לכן האיזון אינו איכותי או בטוח בטווח הארוך."
+    },
+    {
+      q: "2. האם הטיפול שהמטופל מקבל מספיק אופטימלי למצב שלו?",
+      a: "לא. המטופל נמצא בעומס אינסולינוטרפי קשה המנציח עלייה במשקל ותנגודת לאינסולין. אינסולין Lantus (80u) אינו מספק כיסוי בזאלי שטוח מספיק במטופל זה, וספיגת האינסולין נפגעת עקב הזרקה לתוך גושי ליפודוסטרופיה בבטן."
+    },
+    {
+      q: "3. איזה שינויים אפשר ונדרש לבצע? ולמה?",
+      a: "א. החלפת אינסולין בזאלי ל-Degludec (טרגלודק 66u) לשיפור היציבות והפחתת היפוגליקמיות לילה.\nב. הוספת תרופה מקבוצת GLP-1 RA (Wegovy 0.25mg) להורדת משקל, הפחתת תאבון והפחתת תנגודת לאינסולין.\nג. הדרכת הזרקות ורוטציה לרוחב 4 אצבעות מהטבור לכיוון המותן ועד למותניים עצמן.\nד. הדרכה לפעילות גופנית אירובית+אנאירובית ומעקב דיאטנית."
+    }
+  ];
+
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '30px' }}>
       
-      {/* Header Banner */}
+      {/* Header Banner - Clean Title "שלב 2" */}
       <div className="glass-card" style={{ padding: '24px 30px', borderRight: '6px solid #0284c7' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '12px' }}>
           <div>
             <span className="badge badge-blue" style={{ marginBottom: '8px' }}>{data.badge} • {data.date}</span>
-            <h2 style={{ fontSize: '1.8rem', fontWeight: 800, color: '#0f172a' }}>{data.title}</h2>
-            <p style={{ color: '#475569', fontSize: '1.05rem', marginTop: '4px' }}>{data.subtitle}</p>
-          </div>
-          <div style={{ background: '#f0f9ff', padding: '12px 20px', borderRadius: '16px', border: '1px solid #bae6fd' }}>
-            <span style={{ fontSize: '0.85rem', color: '#0369a1', fontWeight: 600 }}>סטטוס טיפול בביקור</span>
-            <div style={{ fontWeight: 800, color: '#0284c7', fontSize: '1.05rem' }}>טרגלודק 66u + Wegovy 0.25mg התחלתי</div>
+            <h2 style={{ fontSize: '2rem', fontWeight: 900, color: '#0f172a' }}>שלב 2</h2>
+            <p style={{ color: '#475569', fontSize: '1.05rem', marginTop: '4px' }}>ביקור ראשון (חלק ב') - פברואר 2026</p>
           </div>
         </div>
       </div>
@@ -134,7 +146,7 @@ export default function Stage2FirstVisitData({ data, onNext, onPrev }) {
           </div>
         </div>
 
-        {/* Card 2: Insulin Injection Site Examination & Lipodystrophy Nodule */}
+        {/* Card 2: Insulin Injection Site Examination & Horizontal 4-finger Width Rule */}
         <div className="glass-card" style={{
           padding: '24px',
           background: 'linear-gradient(135deg, #ffffff 0%, #fff7ed 100%)',
@@ -153,18 +165,18 @@ export default function Stage2FirstVisitData({ data, onNext, onPrev }) {
               בדיקת מקומות הזרקת אינסולין וטכניקה
             </h3>
             <p style={{ color: '#475569', fontSize: '0.94rem', lineHeight: 1.5, marginBottom: '16px' }}>
-              הדגמת בטן מצוירת עם סימון אזורי הזרקה מומלצים מרוחקים 4 אצבעות מהטבור לכיוון המותן.
+              מדידת 4 אצבעות לרוחב מהטבור לכיוון המותן. אזור ההזרקה המותר מתחיל מסיום הזרת ונמשך עד למותן עצמה.
             </p>
 
             {/* Abdomen Injection Diagram Image */}
             <div style={{ textAlign: 'center', marginBottom: '16px', background: 'white', padding: '10px', borderRadius: '16px', border: '1px solid #fed7aa' }}>
               <img
                 src="/abdomen_injection.png"
-                alt="תרשים בטן - אזורי הזרקה וליפודוסטרופיה"
+                alt="תרשים בטן - אזורי הזרקה לרוחב מהטבור וליפודוסטרופיה"
                 style={{ maxHeight: '170px', width: 'auto', borderRadius: '10px', margin: '0 auto' }}
               />
               <div style={{ fontSize: '0.78rem', color: '#c2410c', fontWeight: 700, marginTop: '6px' }}>
-                איור: אזורי הזרקה מרוחקים 4 אצבעות מהטבור + הדגמת גוש ליפודוסטרופיה
+                איור: 4 אצבעות לרוחב מהטבור לכיוון המותן + הדגמת גוש ליפודוסטרופיה
               </div>
             </div>
 
@@ -201,16 +213,73 @@ export default function Stage2FirstVisitData({ data, onNext, onPrev }) {
                   ממצא קליני: הזרקה לתוך גוש ליפודוסטרופיה
                 </div>
                 <div style={{ fontSize: '0.9rem', lineHeight: 1.5, color: '#be123c' }}>
-                  המטופל נוהג להזריק לפעמים לתוך <strong>גוש ליפודוסטרופיה (Lipodystrophy)</strong> שנוצר עקב הזרקות חוזרות באותה נקודה בבטן. הזרקה לתוך רקמה צלקתית זו גורמת לספיגת אינסולין בלתי עקבית ולתנודות סוכר קשות.
+                  המטופל מזריק לפעמים לתוך <strong>גוש ליפודוסטרופיה (Lipodystrophy)</strong> שנוצר מהזרקות חוזרות באותו מקום. הזרקה לתוך הצלקת גורמת לספיגת אינסולין בלתי צפויה ולתנודות סוכר.
                 </div>
                 <div style={{ marginTop: '8px', background: 'white', padding: '8px 12px', borderRadius: '8px', fontWeight: 700, fontSize: '0.85rem', color: '#15803d', border: '1px solid #bbf7d0' }}>
-                  ✔ הדרכה: חובה להרחיק את מקומות ההזרקה 4 אצבעות מהטבור לכיוון המותן ולבצע רוטציה קבועה!
+                  ✔ הדרכה: 4 אצבעות ממוקמות לרוחב מהטבור לכיוון המותן. ניתן להזריק מסיום הזרת (קצה 4 האצבעות) ועד למותן עצמה, כולל במותן!
                 </div>
               </div>
             )}
           </div>
         </div>
 
+      </div>
+
+      {/* Section: Open Clinical Reflection Questions */}
+      <div className="glass-card" style={{ padding: '26px', borderRight: '5px solid #6b21a8', background: '#faf5ff' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '16px' }}>
+          <div style={{ background: '#f3e8ff', color: '#7e22ce', padding: '10px', borderRadius: '12px' }}>
+            <HelpCircle size={22} />
+          </div>
+          <div>
+            <h3 style={{ fontSize: '1.25rem', fontWeight: 800, color: '#0f172a' }}>
+              דילמה וחשיבה קלינית - שאלות פתוחות
+            </h3>
+            <p style={{ color: '#64748b', fontSize: '0.88rem' }}>לחץ על כל שאלה לצפייה בניתוח והנמקה קלינית</p>
+          </div>
+        </div>
+
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+          {openQuestionsData.map((item, idx) => {
+            const isOpen = openQuestionIndex === idx;
+
+            return (
+              <div key={idx} style={{
+                background: 'white',
+                borderRadius: '14px',
+                border: '1px solid #e9d5ff',
+                overflow: 'hidden'
+              }}>
+                <button
+                  onClick={() => setOpenQuestionIndex(isOpen ? null : idx)}
+                  style={{
+                    width: '100%',
+                    padding: '14px 18px',
+                    background: isOpen ? '#f3e8ff' : 'white',
+                    border: 'none',
+                    display: 'flex',
+                    justify: 'space-between',
+                    alignItems: 'center',
+                    cursor: 'pointer',
+                    textAlign: 'right',
+                    fontWeight: 800,
+                    color: '#581c87',
+                    fontSize: '1rem'
+                  }}
+                >
+                  <span>{item.q}</span>
+                  {isOpen ? <ChevronUp size={20} /> : <ChevronDown size={20} />}
+                </button>
+
+                {isOpen && (
+                  <div style={{ padding: '16px 20px', fontSize: '0.95rem', color: '#334155', lineHeight: 1.6, borderTop: '1px solid #f3e8ff', whiteSpace: 'pre-line' }}>
+                    {item.a}
+                  </div>
+                )}
+              </div>
+            );
+          })}
+        </div>
       </div>
 
       {/* Section: Treatment Updates & Lifestyle Guidance */}

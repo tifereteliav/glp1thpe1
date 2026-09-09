@@ -150,10 +150,6 @@ export default function Stage3AGP({ data, onNext, onPrev }) {
 
         {/* View Document Buttons */}
         <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
-          <button onClick={() => openDoc('/labs/ביקור אוגוסט.jpeg')} className="btn-secondary">
-            <FileText size={16} />
-            צפה במסמך ביקור אוגוסט מלא
-          </button>
           <button onClick={() => openDoc('/labs/פרופיל AGP8.26.jpeg')} className="btn-secondary">
             <BarChart2 size={16} />
             צפה בגרף פרופיל AGP אוגוסט

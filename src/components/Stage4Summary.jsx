@@ -60,9 +60,9 @@ export default function Stage4Summary({ data, patient, onRestart, score }) {
         </div>
 
         <div className="glass-card" style={{ padding: '24px', textAlign: 'center' }}>
-          <div style={{ fontSize: '0.9rem', color: '#64748b', fontWeight: 700 }}>הפחתת מינון אינסולין</div>
-          <div style={{ fontSize: '2.6rem', fontWeight: 900, color: '#0d9488', margin: '6px 0' }}>-35%</div>
-          <div style={{ fontSize: '0.85rem', color: '#0f766e' }}>מ-120 יח' ליום ל-58-60 יח' בזאלי</div>
+          <div style={{ fontSize: '0.9rem', color: '#64748b', fontWeight: 700 }}>הפחתת אינסולין מהיר (בולוס)</div>
+          <div style={{ fontSize: '2.6rem', fontWeight: 900, color: '#0d9488', margin: '6px 0' }}>-70%</div>
+          <div style={{ fontSize: '0.85rem', color: '#0f766e' }}>מ-120 יח' ביום (35-40u לארוחה) לכ-35 יח' ביום (10-12u לארוחה)</div>
         </div>
 
         <div className="glass-card" style={{ padding: '24px', textAlign: 'center' }}>
