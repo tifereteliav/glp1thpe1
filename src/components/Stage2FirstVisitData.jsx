@@ -20,7 +20,7 @@ export default function Stage2FirstVisitData({ data, onNext, onPrev }) {
     },
     {
       q: "2. האם הטיפול שהמטופל מקבל מספיק אופטימלי למצב שלו?",
-      a: "לא. המטופל נמצא בעומס אינסולינוטרפי קשה המנציח עלייה במשקל ותנגודת לאינסולין. אינסולין Lantus (80u) אינו מספק כיסוי בזאלי שטוח מספיק במטופל זה, וספיגת האינסולין נפגעת עקב הזרקה לתוך גושי ליפודוסטרופיה בבטן."
+      a: "לא. למטופל יש רקע מורכב של אירוע מוחי איסכמי (CVA בשנת 2020) ו-BMI גבוה (33.96, השמנה דרגה 1). מתן מינוני אינסולין עצומים בלבד (כ-200 יחידות ביום) ללא מענה לתנגודת האינסולין וההשמנה מנציח עלייה במשקל וסיכון קרדיווסקולרי/מוחי מוגבר. טיפול באינסולין בלבד אינו מעניק הגנה מוחית או מטבולית, ומגביר סיכון להיפוגליקמיות וליפודוסטרופיה. הוספת GLP-1 RA (Wegovy) מספקת יתרות קליניות קריטיות: ירידה במשקל, שיפור הרגישות לאינסולין והגנה וסקולרית חיונית במטופל לאחר CVA."
     },
     {
       q: "3. איזה שינויים אפשר ונדרש לבצע? ולמה?",
@@ -164,21 +164,9 @@ export default function Stage2FirstVisitData({ data, onNext, onPrev }) {
             <h3 style={{ fontSize: '1.25rem', fontWeight: 800, color: '#0f172a', marginBottom: '8px' }}>
               בדיקת מקומות הזרקת אינסולין וטכניקה
             </h3>
-            <p style={{ color: '#475569', fontSize: '0.94rem', lineHeight: 1.5, marginBottom: '16px' }}>
-              מדידת 4 אצבעות לרוחב מהטבור לכיוון המותן. אזור ההזרקה המותר מתחיל מסיום הזרת ונמשך עד למותן עצמה.
+            <p style={{ color: '#475569', fontSize: '0.94rem', lineHeight: 1.5, marginBottom: '20px' }}>
+              מדידת 4 אצבעות לרוחב מהטבור לכיוון המותן. אזור ההזרקה המותר מתחיל מסיום הזרת ונמשך לרוחב עד למותן עצמה (כולל במותניים).
             </p>
-
-            {/* Abdomen Injection Diagram Image */}
-            <div style={{ textAlign: 'center', marginBottom: '16px', background: 'white', padding: '10px', borderRadius: '16px', border: '1px solid #fed7aa' }}>
-              <img
-                src="/abdomen_injection.png"
-                alt="תרשים בטן - אזורי הזרקה לרוחב מהטבור וליפודוסטרופיה"
-                style={{ maxHeight: '170px', width: 'auto', borderRadius: '10px', margin: '0 auto' }}
-              />
-              <div style={{ fontSize: '0.78rem', color: '#c2410c', fontWeight: 700, marginTop: '6px' }}>
-                איור: 4 אצבעות לרוחב מהטבור לכיוון המותן + הדגמת גוש ליפודוסטרופיה
-              </div>
-            </div>
 
             {/* Action Trigger Button */}
             <button
@@ -187,11 +175,12 @@ export default function Stage2FirstVisitData({ data, onNext, onPrev }) {
               style={{
                 width: '100%',
                 justify: 'center',
-                padding: '12px',
+                padding: '14px',
                 background: showInjectionDetail ? '#ffedd5' : 'white',
                 borderColor: '#fdba74',
                 color: '#c2410c',
-                fontWeight: 800
+                fontWeight: 800,
+                marginBottom: '10px'
               }}
             >
               <Info size={18} />

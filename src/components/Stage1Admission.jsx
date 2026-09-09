@@ -314,100 +314,15 @@ export default function Stage1Admission({ data, patient, onNext }) {
                   border: '1.5px solid #cbd5e1',
                   boxShadow: '0 4px 12px rgba(0,0,0,0.03)'
                 }}>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '14px', flexWrap: 'wrap', gap: '10px' }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '10px' }}>
                     <div style={{ fontWeight: 800, color: '#0f172a', fontSize: '1rem', display: 'flex', alignItems: 'center', gap: '8px' }}>
                       <BarChart2 size={20} color="#0284c7" />
-                      גרף היסטוריית A1C מקורי (מימין לשמאל: 2003 ← 2026 נוכחי):
+                      היסטוריית A1C (משנת 2003 עד 2026 נוכחי):
                     </div>
-                    <button onClick={() => openDoc('/labs/A1C.jpeg')} className="btn-secondary" style={{ fontSize: '0.85rem', padding: '6px 14px' }}>
-                      <FileText size={14} />
+                    <button onClick={() => openDoc('/labs/A1C.jpeg')} className="btn-primary" style={{ fontSize: '0.9rem', padding: '10px 18px' }}>
+                      <FileText size={16} />
                       צפה בגרף ובטבלת A1C המקורית
                     </button>
-                  </div>
-
-                  {/* RTL SVG Replica Chart of A1C.jpeg */}
-                  <div style={{ width: '100%', height: '180px', position: 'relative', marginTop: '10px', background: '#fafafa', borderRadius: '12px', padding: '10px', border: '1px solid #e2e8f0' }}>
-                    <svg width="100%" height="100%" viewBox="0 0 500 140" preserveAspectRatio="none" style={{ overflow: 'visible' }}>
-                      {/* Grid Lines (Range 4.0% to 15.0%) */}
-                      <line x1="0" y1="20" x2="500" y2="20" stroke="#cbd5e1" strokeDasharray="3 3" />
-                      <text x="490" y="24" textAnchor="end" fontSize="10" fill="#94a3b8">14.0%</text>
-
-                      <line x1="0" y1="60" x2="500" y2="60" stroke="#cbd5e1" strokeDasharray="3 3" />
-                      <text x="490" y="64" textAnchor="end" fontSize="10" fill="#94a3b8">10.0%</text>
-
-                      <line x1="0" y1="100" x2="500" y2="100" stroke="#cbd5e1" strokeDasharray="3 3" />
-                      <text x="490" y="104" textAnchor="end" fontSize="10" fill="#94a3b8">6.0%</text>
-
-                      {/* RTL Polyline Path: Start 2003 (10.4%) at x=480 moving left to 2026 (6.7%) at x=12 */}
-                      <polyline
-                        fill="none"
-                        stroke="#0284c7"
-                        strokeWidth="2.5"
-                        points="
-                          480,55
-                          440,86
-                          400,88
-                          360,48
-                          320,12
-                          280,87
-                          240,89
-                          210,91
-                          180,98
-                          155,97
-                          135,93
-                          115,99
-                          95,94
-                          75,96
-                          60,95
-                          45,89
-                          33,90
-                          23,92
-                          12,93
-                        "
-                      />
-
-                      {/* RTL Points */}
-                      {[
-                        { x: 480, y: 55, val: "10.4%", label: "2003" },
-                        { x: 440, y: 86, val: "7.4%", label: "2005" },
-                        { x: 400, y: 88, val: "7.2%", label: "2007" },
-                        { x: 360, y: 48, val: "11.2%", label: "2009" },
-                        { x: 320, y: 12, val: "14.8%", label: "2010" },
-                        { x: 280, y: 87, val: "7.3%", label: "2011" },
-                        { x: 240, y: 89, val: "7.1%", label: "2012" },
-                        { x: 210, y: 91, val: "6.9%", label: "2013" },
-                        { x: 180, y: 98, val: "6.2%", label: "2014" },
-                        { x: 155, y: 97, val: "6.3%", label: "2015" },
-                        { x: 135, y: 93, val: "6.7%", label: "2016" },
-                        { x: 115, y: 99, val: "6.1%", label: "2017" },
-                        { x: 95, y: 94, val: "6.6%", label: "2019" },
-                        { x: 75, y: 96, val: "6.4%", label: "2020" },
-                        { x: 60, y: 95, val: "6.5%", label: "2021" },
-                        { x: 45, y: 89, val: "7.1%", label: "2022" },
-                        { x: 33, y: 90, val: "7.0%", label: "2024" },
-                        { x: 23, y: 92, val: "6.8%", label: "2025" },
-                        { x: 12, y: 93, val: "6.7%", label: "2026" }
-                      ].map((pt, idx) => (
-                        <g key={idx}>
-                          <circle cx={pt.x} cy={pt.y} r="4" fill={parseFloat(pt.val) > 9 ? "#ef4444" : "#0284c7"} stroke="white" strokeWidth="1.5" />
-                          { (idx % 2 === 0 || parseFloat(pt.val) > 9) && (
-                            <text x={pt.x} y={pt.y - 7} textAnchor="middle" fontSize="9" fontWeight="bold" fill={parseFloat(pt.val) > 9 ? "#ef4444" : "#0369a1"}>{pt.val}</text>
-                          )}
-                        </g>
-                      ))}
-                    </svg>
-                  </div>
-
-                  {/* RTL X-Axis Labels: Right=2003, Left=2026 */}
-                  <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.82rem', color: '#64748b', marginTop: '12px', fontWeight: 600 }}>
-                    <span>2026 (נוכחי)</span>
-                    <span>2024</span>
-                    <span>2021</span>
-                    <span>2017</span>
-                    <span>2013</span>
-                    <span>2010 (שיא 14.8%)</span>
-                    <span>2009</span>
-                    <span>2003 (אבחון 10.4%)</span>
                   </div>
                 </div>
 
